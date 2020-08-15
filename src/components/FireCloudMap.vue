@@ -12,7 +12,6 @@
         :position="m.position"
 	:icon="m.icon === 'red' ? redMarker : (m.icon === 'blue' ? blueMarker : (m.icon === 'yellow' ? yellowMarker : whiteMarker))"
         :clickable="true"
-        :draggable="true"
         @click="latCenter = m.position.lat; lngCenter = m.position.lng"
       />
     </GmapMap>

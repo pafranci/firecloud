@@ -39,7 +39,7 @@
         
         <v-row dense class="justify-center">
           <v-col class="text-center">
-            <v-card :color="alertColor" outlined="true">
+            <v-card :color="alertColor" :outlined="true">
                 <v-card-text v-text="alertLevel.title"></v-card-text>
                 <v-card-title v-text="alertLevel.value" class="justify-center"></v-card-title>
                 <v-card-subtitle v-text="alertLevel.subtitle" class="justify-center"></v-card-subtitle>
@@ -47,20 +47,22 @@
           </v-col>
         </v-row>
 
-        <v-row dense class="justify-center">
-          <v-col
-            v-for="card in cards"
+	<v-container :fluid="true">
+          <v-row dense class="justify-center">
+            <v-col
+              v-for="card in cards"
               :key="card.title"
-              :cols="card.flex"
-            class="text-center"
-          >
-            <v-card>
-                <v-card-text v-text="card.title"></v-card-text>
-                <v-card-title v-text="card.value" class="justify-center"></v-card-title>
-                <v-card-subtitle v-text="card.subtitle" class="justify-center"></v-card-subtitle>
-            </v-card>
-          </v-col>
-        </v-row>
+              :cols="cardFlex"
+              class="text-center"
+            >
+              <v-card>
+                  <v-card-text v-text="card.title"></v-card-text>
+                  <v-card-title v-text="card.value" class="justify-center"></v-card-title>
+                  <v-card-subtitle v-text="card.subtitle" class="justify-center"></v-card-subtitle>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
     </v-main>
     <v-footer
@@ -86,6 +88,7 @@
     },
     data: () => ({
       alertColor: 'blue',
+      cardFlex: 2,
       alertLevel: 
         { title: 'Bushfire Alert Level', 
           color:'blue', 
@@ -103,6 +106,9 @@
     mounted(){
       console.log("mounted");
       console.log(this.cards[0]['value']);
+      if (window.innerWidth < 600) {
+        this.cardFlex = 12
+      }
       var self = this;
       var alertLevels = ['ADVICE', 'WATCH AND ACT', 'EMERGENCY WARNING'];
       var alertLevelColor = ['blue', 'yellow', 'red'];
