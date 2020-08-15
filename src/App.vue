@@ -18,7 +18,7 @@
         fluid
       >
         <v-row dense class="justify-center">
-          <v-tooltip bottom>
+          <!--v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
                 :href="source"
@@ -31,7 +31,8 @@
               </v-btn>
             </template>
             <span>Map</span>
-          </v-tooltip>
+          </v-tooltip-->
+          <FireCloudMap />
         </v-row>
 
         <!--fire-danger-index :highlights="highlights"></fire-danger-index-->
@@ -73,13 +74,15 @@
 
 <script>
   //import FireDangerIndex from "./FireDangerIndex.vue";
+  import FireCloudMap from "./components/FireCloudMap.vue";
 
   export default {
     props: {
       source: String,
     },
-    components:{
+    components: {
       //"fire-danger-index": FireDangerIndex,
+      FireCloudMap,
     },
     data: () => ({
       alertColor: 'blue',

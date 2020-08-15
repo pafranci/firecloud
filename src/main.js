@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import * as VueGoogleMaps from 'vue2-google-maps'
 import vuetify from './plugins/vuetify';
 
 import FusionCharts from 'fusioncharts';
@@ -17,6 +18,14 @@ FusionTheme(FusionCharts);
 
 // Globally register the components for project-wide use
 Vue.use(VueFusionCharts, FusionCharts);
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCSxdhnGcz18Iuv1vt7JKEO4YegSM49A3g',
+    libraries: 'drawing',
+  },
+  installComponents: true,
+})
 
 Vue.config.productionTip = false
 
