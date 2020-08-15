@@ -6,11 +6,15 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title color="red">FireCloud </v-toolbar-title>
+      <v-toolbar-title>FireCloud </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-subtitle>NSW Bushfire Live Status</v-toolbar-subtitle>
+      <v-toolbar-subtitle>Bushfire Live Status</v-toolbar-subtitle>
       
     </v-app-bar>
+    <v-tabs>
+      <v-tab>New South Wales</v-tab>
+      <v-tab>Victoria</v-tab>
+    </v-tabs>
 
     <v-main>
       <v-container
@@ -38,7 +42,7 @@
         
         <v-row dense class="justify-center">
           <v-col class="text-center">
-            <v-card :color="alertColor" outlined="true">
+            <v-card :color="alertColor" flat>
                 <v-card-text v-text="alertLevel.title"></v-card-text>
                 <v-card-title v-text="alertLevel.value" class="justify-center"></v-card-title>
                 <v-card-subtitle v-text="alertLevel.subtitle" class="justify-center"></v-card-subtitle>
@@ -116,14 +120,14 @@
         self.cards[3].value = windDirection[Math.floor((Math.random() * 16))];
         self.cards[4].value = Math.floor((Math.random() * 100) + 1);
         }, 
-        3000);
+        4000);
       setInterval(function(){ 
         alertLevelIndex = Math.floor((Math.random() * 3));
         self.alertLevel.value = alertLevels[alertLevelIndex];
         self.alertColor = alertLevelColor[alertLevelIndex];
         self.alertLevel.subtitle = alertLevelDesc[alertLevelIndex];
         }, 
-        7000);
+        17000);
     },
   }
 </script>
