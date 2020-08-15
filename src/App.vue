@@ -8,7 +8,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title color="red">FireCloud </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-subtitle>NSW Bushfire Live Status</v-toolbar-subtitle>
+      <v-toolbar-subtitle>Australia Bushfire Live Status</v-toolbar-subtitle>
       
     </v-app-bar>
 
