@@ -1,4 +1,4 @@
-# firepath
+# FireCloud
 
 ## Project setup
 ```
