@@ -10,9 +10,8 @@
         v-for="(m, index) in markers"
         :key="index"
         :position="m.position"
-	:icon="m.icon === 'red' ? fireMarker : (m.icon === 'green' ? greenMarker : orangeMarker)"
+	:icon="m.icon === 'red' ? redMarker : (m.icon === 'blue' ? blueMarker : (m.icon === 'yellow' ? yellowMarker : whiteMarker))"
         :clickable="true"
-        :draggable="true"
         @click="latCenter = m.position.lat; lngCenter = m.position.lng"
       />
     </GmapMap>
@@ -29,29 +28,29 @@ export default {
       mapHeight: '1px',
       latCenter: -32.50908265460871,
       lngCenter: 147.14520895312498,
-      markerWidth: 24,
-      markerHeight: 24,
+      markerWidth: 32,
+      markerHeight: 32,
       markers: [
         {
           position: {
             lat: -30.43850781283099,
             lng: 142.16840231249998,
           },
-          icon: 'orange',
+          icon: 'yellow',
         },
         {
           position: {
             lat: -30.073447998941187,
             lng: 145.23324453662107,
           },
-          icon: 'orange',
+          icon: 'yellow',
         },
         {
           position: {
             lat: -35.083296620753956,
             lng: 145.56317770312498,
           },
-          icon: 'green',
+          icon: 'blue',
         },
         {
           position: {
@@ -67,34 +66,66 @@ export default {
           },
           icon: 'red',
         },
+        {
+          position: {
+            lat: -31.77946952696155,
+            lng: 149.83507969290247,
+          },
+          icon: 'white',
+        },
       ],
     }
   },
   computed: {
-    fireMarker() {
+    redMarker() {
       return {
-        url: 'https://image.flaticon.com/icons/png/128/785/785116.png',
+        url: require('../assets/redIcon.png'),
         scaledSize: {
           width: this.markerWidth,
           height: this.markerHeight,
         },
+        anchor: {
+          x: 21,
+          y: 21,
+        },
       }
     },
-    orangeMarker() {
+    yellowMarker() {
       return {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Location_dot_orange.svg/600px-Location_dot_orange.svg.png',
+        url: require('../assets/yellowIcon.png'),
         scaledSize: {
           width: this.markerWidth,
           height: this.markerHeight,
         },
+        anchor: {
+          x: 21,
+          y: 21,
+        },
       }
     },
-    greenMarker() {
+    blueMarker() {
       return {
-        url: 'https://miro.medium.com/max/512/1*nZ9VwHTLxAfNCuCjYAkajg.png',
+        url: require('../assets/blueIcon.png'),
         scaledSize: {
           width: this.markerWidth,
           height: this.markerHeight,
+        },
+        anchor: {
+          x: 21,
+          y: 21,
+        },
+      }
+    },
+    whiteMarker() {
+      return {
+        url: require('../assets/whiteIcon.png'),
+        scaledSize: {
+          width: this.markerWidth,
+          height: this.markerHeight,
+        },
+        anchor: {
+          x: 21,
+          y: 21,
         },
       }
     },
@@ -115,9 +146,76 @@ export default {
     this.mapWidth = (window.innerWidth) + 'px'
     this.mapHeight = (window.innerHeight*2/3 - 100) + 'px'
     window.setInterval(() => {
-      this.count = (this.count + 1) % 50
-      this.markerWidth = this.markerHeight = ((this.count / 100) * 32) + 20
+      this.count = (this.count + 1) % 50 + 50
+      this.markerWidth = this.markerHeight = ((this.count / 100) * 14)
     }, 40)
+
+    // NSW
+    for (let i = 0; i < 40; ++i) {
+      this.markers.push({
+        position: {
+          lat: -33.480323232423295 + Math.random() * 1.5,
+          lng: 141.6251207573242 + Math.random() * 3.5,
+        },
+        icon: 'red',
+      })
+    }
+    for (let i = 0; i < 20; ++i) {
+      this.markers.push({
+        position: {
+          lat: -30.43850781283099 + Math.random() * 1,
+          lng: 142.16840231249998 + Math.random() * 3,
+        },
+        icon: 'yellow',
+      })
+    }
+    for (let i = 0; i < 10; ++i) {
+      this.markers.push({
+        position: {
+          lat: -35.08329662075399 + Math.random() * 1,
+          lng: 145.56317770312498 + Math.random() * 3,
+        },
+        icon: 'blue',
+      })
+    }
+    for (let i = 0; i < 10; ++i) {
+      this.markers.push({
+        position: {
+          lat: -31.77946952696155 + Math.random() * 1,
+          lng: 149.83507969290247 + Math.random() * 3,
+        },
+        icon: 'white',
+      })
+    }
+
+    // VIC
+    for (let i = 0; i < 20; ++i) {
+      this.markers.push({
+        position: {
+          lat: -37.54066279310928 + Math.random() * 1,
+          lng: 146.03223237386703 + Math.random() * 3,
+        },
+        icon: 'red',
+      })
+    }
+    for (let i = 0; i < 5; ++i) {
+      this.markers.push({
+        position: {
+          lat: -37.82126193493862 + Math.random() * 0.5,
+          lng: 144.8486611928303 + Math.random() * 0.5,
+        },
+        icon: 'blue',
+      })
+    }
+    for (let i = 0; i < 20; ++i) {
+      this.markers.push({
+        position: {
+          lat: -34.809130292658324 - Math.random() * 2,
+          lng: 141.78086908892567 + Math.random() * 3,
+        },
+        icon: 'yellow',
+      })
+    }
   }
 }
 </script>

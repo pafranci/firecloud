@@ -6,15 +6,10 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>FireCloud </v-toolbar-title>
+      <v-toolbar-title>FireCloud</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-subtitle>Bushfire Live Status</v-toolbar-subtitle>
-      
+      <v-toolbar-subtitle>Australia Bushfire Live Status</v-toolbar-subtitle> 
     </v-app-bar>
-    <v-tabs>
-      <v-tab>New South Wales</v-tab>
-      <v-tab>Victoria</v-tab>
-    </v-tabs>
 
     <v-main>
       <v-container
@@ -22,28 +17,12 @@
         fluid
       >
         <v-row dense class="justify-center">
-          <!--v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                :href="source"
-                icon
-                large
-                target="_blank"
-                v-on="on"
-              >
-                <v-icon>mdi-map</v-icon>
-              </v-btn>
-            </template>
-            <span>Map</span>
-          </v-tooltip-->
           <FireCloudMap />
         </v-row>
-
-        <!--fire-danger-index :highlights="highlights"></fire-danger-index-->
         
         <v-row dense class="justify-center">
           <v-col class="text-center">
-            <v-card :color="alertColor" flat>
+            <v-card :color="alertColor" :outlined="true">
                 <v-card-text v-text="alertLevel.title"></v-card-text>
                 <v-card-title v-text="alertLevel.value" class="justify-center"></v-card-title>
                 <v-card-subtitle v-text="alertLevel.subtitle" class="justify-center"></v-card-subtitle>
@@ -51,20 +30,22 @@
           </v-col>
         </v-row>
 
-        <v-row dense class="justify-center">
-          <v-col
-            v-for="card in cards"
+	<v-container :fluid="true">
+          <v-row dense class="justify-center">
+            <v-col
+              v-for="card in cards"
               :key="card.title"
-              :cols="card.flex"
-            class="text-center"
-          >
-            <v-card>
-                <v-card-text v-text="card.title"></v-card-text>
-                <v-card-title v-text="card.value" class="justify-center"></v-card-title>
-                <v-card-subtitle v-text="card.subtitle" class="justify-center"></v-card-subtitle>
-            </v-card>
-          </v-col>
-        </v-row>
+              :cols="cardFlex"
+              class="text-center"
+            >
+              <v-card>
+                  <v-card-text v-text="card.title"></v-card-text>
+                  <v-card-title v-text="card.value" class="justify-center"></v-card-title>
+                  <v-card-subtitle v-text="card.subtitle" class="justify-center"></v-card-subtitle>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
     </v-main>
     <v-footer
@@ -90,6 +71,7 @@
     },
     data: () => ({
       alertColor: 'blue',
+      cardFlex: 2,
       alertLevel: 
         { title: 'Bushfire Alert Level', 
           color:'blue', 
@@ -104,9 +86,15 @@
         { title: 'Humidity (%)', value: '81', flex: 2 },
       ],
     }),
+    created () {
+      document.title = 'FireCloud'
+    },
     mounted(){
       console.log("mounted");
       console.log(this.cards[0]['value']);
+      if (window.innerWidth < 600) {
+        this.cardFlex = 12
+      }
       var self = this;
       var alertLevels = ['ADVICE', 'WATCH AND ACT', 'EMERGENCY WARNING'];
       var alertLevelColor = ['blue', 'yellow', 'red'];
